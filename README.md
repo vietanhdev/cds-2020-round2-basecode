@@ -16,7 +16,7 @@
 ##  GPIO: 
 - https://devtalk.nvidia.com/default/topic/1030443/jetson-tx2/using-gpio-on-nvidia-jetson-tx2/
 - Using library: https://github.com/vitiral/gpio.git
-- GPIO without root: https://jkjung-avt.github.io/gpio-non-root/
+- GPIO without root: https://jkjung-avt.github.io/gpio-non-root/. (`dependencies/non_root_gpio/`)
 
 ## LCD:
 - pip3 install smbus
