@@ -40,4 +40,8 @@ sudo pip3 install smbus
 
 ## Gyro
 https://github.com/RTIMULib/RTIMULib2.git
-
+```
+cd dependencies/RTIMULib2/Linux/python
+python3 setup.py build
+python3 setup.py install
+```

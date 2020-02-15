@@ -1,5 +1,5 @@
 # ====== Camera ======
-OPENNI_PATH = "/home/ubuntu/superfast/libs/OpenNI"
+OPENNI_PATH = "./libs/OpenNI"
 
 # ====== Motors ======
 MOTOR_FREQ = 97 # Provided by FPT
@@ -47,3 +47,6 @@ GPIO_BUTTON_4 = 392
 
 GPIO_BUTTON_SS1 = 398
 GPIO_BUTTON_SS2 = 396
+
+# ====== MPU9250 ======
+MPU9250_SETTING_FILE = "data/MPU9250/RTIMULib"
