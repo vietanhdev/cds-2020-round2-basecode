@@ -34,3 +34,8 @@ MAX_SPEED = 20
 
 MIN_SERVO = 0
 MAX_SERVO = 180
+
+
+# ====== LCD ======
+# LCD Address
+LCD_ADDRESS = 0x22
