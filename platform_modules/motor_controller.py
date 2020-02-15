@@ -7,7 +7,6 @@ import time
 import threading
 import global_storage as gs
 import math
-import time
 usleep = lambda x: time.sleep(x/1000000.0)
 
 

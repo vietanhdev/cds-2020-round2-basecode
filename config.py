@@ -2,7 +2,6 @@
 OPENNI_PATH = "/home/ubuntu/superfast/libs/OpenNI"
 
 # ====== Motors ======
-
 MOTOR_FREQ = 97 # Provided by FPT
 
 # /* Duty cycle
@@ -39,3 +38,12 @@ MAX_SERVO = 180
 # ====== LCD ======
 # LCD Address
 LCD_ADDRESS = 0x22
+
+# ====== Buttons ======
+GPIO_BUTTON_1 = 395
+GPIO_BUTTON_2 = 393
+GPIO_BUTTON_3 = 394
+GPIO_BUTTON_4 = 392
+
+GPIO_BUTTON_SS1 = 398
+GPIO_BUTTON_SS2 = 396
