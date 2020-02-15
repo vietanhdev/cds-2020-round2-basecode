@@ -4,8 +4,14 @@
 - Hardware: DIRA platform - FPT
 - Python 3.6
 
+## I2C
+- List I2C: `sudo i2cdetect -y -r 1`.
+
 ## Camera
-- Use python package `primesense`.
+- Library: `primesense`.
+
+## Motors:
+- Library: https://github.com/adafruit/Adafruit_Python_PCA9685
 
 ##  GPIO: 
 - https://devtalk.nvidia.com/default/topic/1030443/jetson-tx2/using-gpio-on-nvidia-jetson-tx2/

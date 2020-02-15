@@ -11,5 +11,3 @@ depth_frames = queue.Queue(5)
 pause = False
 speed = 0
 steer = 0
-min_speed = 10
-min_steer = 0

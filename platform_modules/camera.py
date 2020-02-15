@@ -53,7 +53,6 @@ class RGBCamera(threading.Thread):
 
         # Get image continuously
         while not gs.exit_signal:
-            time.sleep(0.05)
             bgr   = np.fromstring(rgb_stream.read_frame().get_buffer_as_uint8(),dtype=np.uint8).reshape(480,640,3)
             gs.rgb_frames.put(bgr)
 
@@ -74,7 +73,6 @@ class DepthCamera(threading.Thread):
 
         # Get image continuously
         while not gs.exit_signal:
-            time.sleep(0.05)
             frame = depth_stream.read_frame()
             frame_data = frame.get_buffer_as_uint16()
             img = np.frombuffer(frame_data, dtype=np.uint16)

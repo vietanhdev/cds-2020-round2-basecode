@@ -1,5 +1,5 @@
 import cv2
-from camera import Camera
+from platform_modules.camera import Camera
 import global_storage as gs
 import signal
 import sys
