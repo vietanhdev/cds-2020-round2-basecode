@@ -7,6 +7,14 @@ exit_signal = False
 rgb_frames = queue.Queue(5)
 depth_frames = queue.Queue(5)
 
+# Emergency STOP
+# When the car hits obstacle or when
+# user presses emergency stop button
+# following value will be set to True
+# causing car to brake
+emergency_stop = False
+
+
 # Motor states
 pause = False
 speed = 0

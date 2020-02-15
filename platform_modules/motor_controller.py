@@ -7,6 +7,7 @@ import time
 import threading
 import global_storage as gs
 import math
+import signal
 usleep = lambda x: time.sleep(x/1000000.0)
 
 
@@ -26,12 +27,22 @@ class MotorController(threading.Thread):
         self.pwm.set_pwm(cf.STEERING_CHANNEL, 0, pwm_steer_middle)
         self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
 
+        # Stop motor when exit
+        signal.signal(signal.SIGUSR2, self.stop_car_on_exit)
+        signal.signal(signal.SIGTERM, self.stop_car_on_exit)
+        signal.signal(signal.SIGINT, self.stop_car_on_exit)
+
     def run(self):
         while not gs.exit_signal:
             self.set_speed(gs.speed)
             self.set_steer(gs.steer)
+        self.stop_car_on_exit(None, None)
 
     def set_speed(self, throttle_val):
+        if gs.emergency_stop:
+            self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, 0)
+            return
+
         if throttle_val > 0:
             if self.direction == -1:
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_FORWARD)
@@ -64,6 +75,7 @@ class MotorController(threading.Thread):
     def value_map (self, x, in_min, in_max, out_min, out_max):
         return int( 1.0 * (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min )
 
-
-
-
+    def stop_car_on_exit(self, num, stack):
+        gs.emergency_stop = True
+        self.set_speed(0)
+        self.set_steer(0)

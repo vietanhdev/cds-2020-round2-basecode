@@ -33,6 +33,7 @@ class ButtonReader(threading.Thread):
             gs.button_ss1 = gpio.read(cf.GPIO_BUTTON_SS1)
             gs.button_ss2 = gpio.read(cf.GPIO_BUTTON_SS2)
             time.sleep(0.05)
+        self.clean_up_gpio(None, None)
 
     def clean_up_gpio(self, num, stack):
         print("Clean up GPIO...")
