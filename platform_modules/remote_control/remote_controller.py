@@ -10,7 +10,6 @@ import json
 from flask import Flask, request, send_from_directory, redirect
 from flask_sockets import Sockets
 
-
 class RemoteController(threading.Thread):
 
     def __init__(self):
@@ -35,10 +34,11 @@ class RemoteController(threading.Thread):
                 gs.remote_control_speed = control_params["speed"]
                 gs.remote_control_steer_angle = control_params["steer"]
                 gs.speed = min(gs.remote_control_speed / gs.remote_control_max_speed * cf.MAX_SPEED, cf.MAX_SPEED)
-                gs.steer = max(min(gs.remote_control_steer_angle / gs.remote_control_max_steer_angle * cf.MIN_ANGLE, cf.MAX_ANGLE), cf.MIN_ANGLE)
+                gs.steer = -max(min(gs.remote_control_steer_angle / gs.remote_control_max_steer_angle * cf.MIN_ANGLE, cf.MAX_ANGLE), cf.MIN_ANGLE)
                 gs.record_videos = control_params["record_videos"]
                 if control_params["emergency_stop"]:
                     gs.emergency_stop = control_params["emergency_stop"]
+                gs.last_time_control_signal = time.time()
         self.app = app
 
 

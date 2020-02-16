@@ -33,6 +33,7 @@ button_ss2 = False
 led_state = False
 
 # Remote control sensor
+last_control_signal_time = 0
 remote_control_max_speed = 100
 remote_control_max_steer_angle = 150
 remote_control_speed = 0

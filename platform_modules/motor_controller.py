@@ -39,29 +39,43 @@ class MotorController(threading.Thread):
             self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
             usleep(187500)
             return
+
+        # Filter too low throttle to protect motors
+        if abs(throttle_val) < cf.MIN_ACTIVE_SPEED:
+            throttle_val = 0
+
         if throttle_val > 0:
             if self.direction == -1:
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_FORWARD)
-                usleep(5000)
+                usleep(50000)
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
                 self.direction = 0
-                usleep(5000)
+                usleep(50000)
             self.direction = 1
             pwm = self.value_map(throttle_val, 0, 100, cf.THROTTLE_NEUTRAL, cf.THROTTLE_MAX_FORWARD)
             self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, pwm)
+            usleep(5000)
         elif throttle_val < 0:
             if self.direction == 1:
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_REVERSE)
-                usleep(5000)
+                usleep(50000)
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
                 self.direction = 0
-                usleep(5000)
+                usleep(50000)
             self.direction = -1
             pwm = 4095 - self.value_map( abs(throttle_val), 0, 100 , 4095 - cf.THROTTLE_NEUTRAL , 4095 - cf.THROTTLE_MAX_REVERSE)
             self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, pwm)
+            usleep(5000)
         else:
+            if self.direction == 1:
+                self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_REVERSE)
+                usleep(50000)
+            elif self.direction == -1:
+                self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_FORWARD)
+                usleep(50000)
             self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
-        usleep(5000)
+            usleep(100000)
+            self.direction = 0
 
     def set_steer(self, steer_angle):
         steer_angle =  min(cf.MAX_ANGLE, max(cf.MIN_ANGLE, steer_angle))

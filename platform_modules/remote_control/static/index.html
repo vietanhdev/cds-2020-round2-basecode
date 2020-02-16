@@ -78,8 +78,8 @@
 		socket.onopen = () => {
 			setInterval(function () {
 				var outputEl = document.getElementById('result');
-				let speed = -Math.round(joystick1.deltaY());
-				let steer = Math.round(joystick2.deltaX());
+				let speed = -joystick1.deltaY();
+				let steer = joystick2.deltaX();
 				outputEl.innerHTML = '<b>Speed:</b> ' + speed + ' <b>Angle:</b> ' + steer;
 				socket.send(JSON.stringify({"speed": speed, "steer": steer, "record_videos": recordVideo, "emergency_stop": emergencyStop}));
 			}, 1 / 30 * 1000);

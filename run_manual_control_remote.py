@@ -7,7 +7,7 @@ from platform_modules.lcd_driver import LCD
 from platform_modules.button_reader import ButtonReader
 from platform_modules.car_guard import CarGuard
 from platform_modules.camera import Camera
-from platform_modules.remote_control.remote_controller import RemoteController
+from platform_modules.remote_control.remote_controller_udp import RemoteControllerUDP
 from utils.keyboard_getch import _Getch
 import global_storage as gs
 import config as cf
@@ -29,13 +29,13 @@ motor_controller = MotorController()
 motor_controller.start()
 
 # Init remote controller
-remote_controller = RemoteController()
+remote_controller = RemoteControllerUDP()
 remote_controller.start()
 
 
 # Car guard
 # Stop car when hitting obstacle or when user presses button 4
-guard = CarGuard()
+guard = CarGuard(stop_on_distance_sensor_covered=False)
 guard.start()
 
 # UI thread
