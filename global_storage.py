@@ -8,12 +8,6 @@ rgb_frames = queue.Queue(5)
 depth_frames = queue.Queue(5)
 record_videos = False
 
-# Global variable to save VideoWriter
-is_recording = False
-rgb_frame_count = 0
-rgb_video_file = None 
-depth_video_file = None
-
 # Emergency STOP
 # When the car hits obstacle or when
 # user presses emergency stop button
@@ -34,3 +28,6 @@ button_3 = False
 button_4 = False
 button_ss1 = False
 button_ss2 = False
+
+# Led
+led_state = False

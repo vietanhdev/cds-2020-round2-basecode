@@ -40,7 +40,7 @@ MAX_SERVO = 180
 # LCD Address
 LCD_ADDRESS = 0x22
 
-# ====== Buttons ======
+# ====== Buttons, led ======
 GPIO_BUTTON_1 = 395
 GPIO_BUTTON_2 = 393
 GPIO_BUTTON_3 = 394
@@ -48,6 +48,8 @@ GPIO_BUTTON_4 = 392
 
 GPIO_BUTTON_SS1 = 398
 GPIO_BUTTON_SS2 = 396
+
+GPIO_LED = 481
 
 # ====== MPU9250 ======
 MPU9250_SETTING_FILE = "data/MPU9250/RTIMULib"

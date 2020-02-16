@@ -20,9 +20,12 @@ class ButtonReader(threading.Thread):
                 gpio.setup(cf.GPIO_BUTTON_3, gpio.IN)
                 gpio.setup(cf.GPIO_BUTTON_4, gpio.IN)
                 gpio.setup(cf.GPIO_BUTTON_SS1, gpio.IN)
-                gpio.setup(cf.GPIO_BUTTON_SS2, gpio.IN)    
+                gpio.setup(cf.GPIO_BUTTON_SS2, gpio.IN)
+                gpio.setup(cf.GPIO_LED, gpio.OUT)
+                
             except:
                 val = os.system('sudo chmod -R 777 /sys/class/gpio/gpio*')
+                continue
             
             break
 
@@ -34,16 +37,17 @@ class ButtonReader(threading.Thread):
             gs.button_4 = gpio.read(cf.GPIO_BUTTON_4)
             gs.button_ss1 = gpio.read(cf.GPIO_BUTTON_SS1)
             gs.button_ss2 = gpio.read(cf.GPIO_BUTTON_SS2)
+            gpio.output(cf.GPIO_LED, gs.led_state)
             time.sleep(0.05)
         self.clean_up_gpio(None, None)
         print("Exiting from ButtonReader")
 
     def clean_up_gpio(self, num, stack):
         print("Clean up GPIO...")
-        # gpio.cleanup(cf.GPIO_BUTTON_1)
-        # gpio.cleanup(cf.GPIO_BUTTON_2)
-        # gpio.cleanup(cf.GPIO_BUTTON_3)
-        # gpio.cleanup(cf.GPIO_BUTTON_4)
-        # gpio.cleanup(cf.GPIO_BUTTON_SS1)
-        # gpio.cleanup(cf.GPIO_BUTTON_SS2)
+        gpio.cleanup(cf.GPIO_BUTTON_1)
+        gpio.cleanup(cf.GPIO_BUTTON_2)
+        gpio.cleanup(cf.GPIO_BUTTON_3)
+        gpio.cleanup(cf.GPIO_BUTTON_4)
+        gpio.cleanup(cf.GPIO_BUTTON_SS1)
+        gpio.cleanup(cf.GPIO_BUTTON_SS2)
         exit(0)

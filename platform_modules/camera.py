@@ -59,14 +59,14 @@ class Camera(threading.Thread):
                     gs.is_recording = True
 
                     rgb_grabber.start_recording(gs.rgb_video_file)
-                    # depth_grabber.start_recording(gs.depth_video_file)
+                    depth_grabber.start_recording(gs.depth_video_file)
 
                 else: # Stop video recording
 
                     print("Stop recording...")
 
                     rgb_grabber.stop_recording()
-                    # depth_grabber.stop_recording()
+                    depth_grabber.stop_recording()
 
                 self.record_videos = gs.record_videos
 
@@ -165,7 +165,7 @@ class DepthCamera(threading.Thread):
             
             if DepthCamera.is_recording:
                 img_rgb = cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)
-                cvuint8 = cv2.convertScaleAbs(img_rgb)
+                cvuint8 = cv2.convertScaleAbs(img_rgb, alpha=(255.0/65535.0))
                 DepthCamera.out_file.write(cvuint8)
 
 
