@@ -49,10 +49,14 @@ class RemoteControllerUDP(threading.Thread):
             gs.speed = min(gs.remote_control_speed * cf.MAX_SPEED, cf.MAX_SPEED)
             gs.steer = max(min(gs.remote_control_steer_angle * cf.MIN_ANGLE, cf.MAX_ANGLE), cf.MIN_ANGLE)
 
-            if x2 == 2000 and y2 == 1000: # Top right - turn on video recording
+            if x2 == 2000 and y2 == 2000 and y1 == 1500: # Bottom right - turn on video recording
                 gs.record_videos = True
-            elif x2 == 1000 and y2 == 2000: # Bottom left - turn off video recording
+            elif x2 == 1000 and y2 == 2000 and y1 == 1500: # Bottom left - turn off video recording
                 gs.record_videos = False
+            elif x2 = 2000 and y2 == 1000 and y1 == 1500: # Top right - emergency stop
+                gs.emergency_stop = True
+            elif x2 = 1000 and y2 == 1000 and y1 == 1500: # Top left - remove emergency stop flag
+                gs.emergency_stop = False
             gs.last_time_control_signal = time.time()
 
            
