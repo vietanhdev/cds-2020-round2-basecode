@@ -81,7 +81,7 @@ class MotorController(threading.Thread):
         steer_angle =  min(cf.MAX_ANGLE, max(cf.MIN_ANGLE, steer_angle))
         pwm = self.value_map(steer_angle, cf.MIN_ANGLE, cf.MAX_ANGLE, cf.STEERING_MAX_RIGHT, cf.STEERING_MAX_LEFT)
         self.pwm.set_pwm(cf.STEERING_CHANNEL, 0, pwm)
-        usleep(5000)
+        usleep(2500)
         
     def value_map (self, x, in_min, in_max, out_min, out_max):
         return int( 1.0 * (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min )

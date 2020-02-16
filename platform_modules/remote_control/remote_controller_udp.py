@@ -42,7 +42,7 @@ class RemoteControllerUDP(threading.Thread):
 
             
             gs.remote_control_speed = (1500-y1) / 500.0 
-            gs.remote_control_steer_angle = (x2-1500) / 500.0
+            gs.remote_control_steer_angle = (1500-x2) / 500.0
             gs.speed = min(gs.remote_control_speed * cf.MAX_SPEED, cf.MAX_SPEED)
             gs.steer = max(min(gs.remote_control_steer_angle * cf.MIN_ANGLE, cf.MAX_ANGLE), cf.MIN_ANGLE)
             # gs.record_videos = control_params["record_videos"]
