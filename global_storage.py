@@ -31,3 +31,9 @@ button_ss2 = False
 
 # Led
 led_state = False
+
+# Remote control sensor
+remote_control_max_speed = 100
+remote_control_max_steer_angle = 150
+remote_control_speed = 0
+remote_control_steer_angle = 0

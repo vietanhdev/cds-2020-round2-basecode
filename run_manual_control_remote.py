@@ -7,6 +7,7 @@ from platform_modules.lcd_driver import LCD
 from platform_modules.button_reader import ButtonReader
 from platform_modules.car_guard import CarGuard
 from platform_modules.camera import Camera
+from platform_modules.remote_control.remote_controller import RemoteController
 from utils.keyboard_getch import _Getch
 import global_storage as gs
 import config as cf
@@ -26,6 +27,11 @@ button_reader.start()
 # Init motor controller
 motor_controller = MotorController()
 motor_controller.start()
+
+# Init remote controller
+remote_controller = RemoteController()
+remote_controller.start()
+
 
 # Car guard
 # Stop car when hitting obstacle or when user presses button 4
@@ -60,20 +66,25 @@ def ui_thread():
             pressed_buttons.append("S2")
 
         if any([s for s in pressed_buttons if "1" == s]):
-            gs.record_videos = True
+            gs.record_videos = not gs.record_videos
 
-        # if time.time() - last_time_update_screen > 1:
-        lcd.lcd_clear()
-        lcd.lcd_display_string("Manual mode:", 1)
-        lcd.lcd_display_string("1:RECORD,4:STOP", 2)
+        if any([s for s in pressed_buttons if "3" == s]):
+            gs.emergency_stop = False
+
+        if time.time() - last_time_update_screen > 1:
+            lcd.lcd_clear()
+            lcd.lcd_display_string("Manual mode:", 1)
+            lcd.lcd_display_string("1:RECORD,4:STOP", 2)
          
-        if gs.emergency_stop:
-            lcd.lcd_display_string("EMERGENCY!!!", 4)
+            if gs.emergency_stop:
+                lcd.lcd_display_string("EMERGENCY!!!", 4)
 
-        if gs.record_videos:
-            lcd.lcd_display_string("[.] Recording...", 3)
+            if gs.record_videos:
+                lcd.lcd_display_string("[.] Recording...", 3)
 
-        last_time_update_screen = time.time()
+            last_time_update_screen = time.time()
+
+        
 
         # Update values
         last_button_1 = gs.button_1
@@ -128,3 +139,4 @@ while not gs.exit_signal:
 # motor_controller.join()
 # guard.join()
 # button_reader.join()
+# remote_controller.join()

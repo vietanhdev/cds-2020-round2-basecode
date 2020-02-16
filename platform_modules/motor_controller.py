@@ -42,20 +42,20 @@ class MotorController(threading.Thread):
         if throttle_val > 0:
             if self.direction == -1:
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_FORWARD)
-                usleep(187500)
+                usleep(5000)
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
                 self.direction = 0
-                usleep(187500)
+                usleep(5000)
             self.direction = 1
             pwm = self.value_map(throttle_val, 0, 100, cf.THROTTLE_NEUTRAL, cf.THROTTLE_MAX_FORWARD)
             self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, pwm)
         elif throttle_val < 0:
             if self.direction == 1:
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_MAX_REVERSE)
-                usleep(187500)
+                usleep(5000)
                 self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
                 self.direction = 0
-                usleep(187500)
+                usleep(5000)
             self.direction = -1
             pwm = 4095 - self.value_map( abs(throttle_val), 0, 100 , 4095 - cf.THROTTLE_NEUTRAL , 4095 - cf.THROTTLE_MAX_REVERSE)
             self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, pwm)
