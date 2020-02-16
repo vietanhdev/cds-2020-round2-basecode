@@ -53,9 +53,9 @@ class RemoteControllerUDP(threading.Thread):
                 gs.record_videos = True
             elif x2 == 1000 and y2 == 2000 and y1 == 1500: # Bottom left - turn off video recording
                 gs.record_videos = False
-            elif x2 = 2000 and y2 == 1000 and y1 == 1500: # Top right - emergency stop
+            elif x2 == 2000 and y2 == 1000 and y1 == 1500: # Top right - emergency stop
                 gs.emergency_stop = True
-            elif x2 = 1000 and y2 == 1000 and y1 == 1500: # Top left - remove emergency stop flag
+            elif x2 == 1000 and y2 == 1000 and y1 == 1500: # Top left - remove emergency stop flag
                 gs.emergency_stop = False
             gs.last_time_control_signal = time.time()
 
