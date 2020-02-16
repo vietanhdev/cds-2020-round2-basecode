@@ -127,6 +127,8 @@ class RGBCamera(threading.Thread):
         RGBCamera.is_recording = True
 
     def stop_recording(self):
+        if not self.is_recording:
+            return
         if RGBCamera.out_file is not None:
             try:
                 RGBCamera.out_file.release()
@@ -181,6 +183,8 @@ class DepthCamera(threading.Thread):
         DepthCamera.is_recording = True
 
     def stop_recording(self):
+        if not self.is_recording:
+            return
         if DepthCamera.is_recording:
             try:
                 DepthCamera.out_file.release()

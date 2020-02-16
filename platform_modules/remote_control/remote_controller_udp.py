@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+
+# Use this controller with UDP Joystick app - Android
+
 import sys
 import config as cf
 import time
@@ -45,9 +48,11 @@ class RemoteControllerUDP(threading.Thread):
             gs.remote_control_steer_angle = (1500-x2) / 500.0
             gs.speed = min(gs.remote_control_speed * cf.MAX_SPEED, cf.MAX_SPEED)
             gs.steer = max(min(gs.remote_control_steer_angle * cf.MIN_ANGLE, cf.MAX_ANGLE), cf.MIN_ANGLE)
-            # gs.record_videos = control_params["record_videos"]
-            # if control_params["emergency_stop"]:
-            #     gs.emergency_stop = control_params["emergency_stop"]
+
+            if x2 == 2000 and y2 == 1000: # Top right - turn on video recording
+                gs.record_videos = True
+            elif x2 == 1000 and y2 == 2000: # Bottom left - turn off video recording
+                gs.record_videos = False
             gs.last_time_control_signal = time.time()
 
            
