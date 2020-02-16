@@ -45,3 +45,14 @@ cd dependencies/RTIMULib2/Linux/python
 python3 setup.py build
 python3 setup.py install
 ```
+
+## Remote control using Android smartphone
+
+- Download and use this app: https://play.google.com/store/apps/details?id=com.denods.udpjoystick&hl=vi
+- Enter ip address to Jetson and enter port 12345.
+- Use y axis of left joystick to control speed and x axis of right joystick to control steering angle.
+- **Special functions:** move left joystick to y = 0 and right joystick to special position to activate special functions:
+    + Top - right: Emergency stop.
+    + Top - left: Remove emergency stop flag.
+    + Bottom - right: Start video recording.
+    + Bottom - left: Stop video recording.
