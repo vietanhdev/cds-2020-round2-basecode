@@ -1,5 +1,6 @@
 # ====== Camera ======
 OPENNI_PATH = "./libs/OpenNI"
+RECORDING_PATH = "./videos"
 
 # ====== Motors ======
 MOTOR_FREQ = 97 # Provided by FPT

@@ -27,16 +27,12 @@ class MotorController(threading.Thread):
         self.pwm.set_pwm(cf.STEERING_CHANNEL, 0, pwm_steer_middle)
         self.pwm.set_pwm(cf.THROTTLE_CHANNEL, 0, cf.THROTTLE_NEUTRAL)
 
-        # Stop motor when exit
-        signal.signal(signal.SIGUSR2, self.stop_car_on_exit)
-        signal.signal(signal.SIGTERM, self.stop_car_on_exit)
-        signal.signal(signal.SIGINT, self.stop_car_on_exit)
-
     def run(self):
         while not gs.exit_signal:
             self.set_speed(gs.speed)
             self.set_steer(gs.steer)
         self.stop_car_on_exit(None, None)
+        print("Exiting from MotorController")
 
     def set_speed(self, throttle_val):
         if gs.emergency_stop:
@@ -80,3 +76,4 @@ class MotorController(threading.Thread):
         gs.emergency_stop = True
         self.set_speed(0)
         self.set_steer(0)
+        exit(0)

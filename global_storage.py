@@ -6,6 +6,13 @@ exit_signal = False
 # Images from camera
 rgb_frames = queue.Queue(5)
 depth_frames = queue.Queue(5)
+record_videos = False
+
+# Global variable to save VideoWriter
+is_recording = False
+rgb_frame_count = 0
+rgb_video_file = None 
+depth_video_file = None
 
 # Emergency STOP
 # When the car hits obstacle or when

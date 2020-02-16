@@ -6,23 +6,25 @@ import time
 import threading
 import global_storage as gs
 import signal
+import os
 
 class ButtonReader(threading.Thread):
 
     def __init__(self):
         threading.Thread.__init__(self)
-        gpio.setup(cf.GPIO_BUTTON_1, gpio.IN)
-        gpio.setup(cf.GPIO_BUTTON_2, gpio.IN)
-        gpio.setup(cf.GPIO_BUTTON_3, gpio.IN)
-        gpio.setup(cf.GPIO_BUTTON_4, gpio.IN)
-        gpio.setup(cf.GPIO_BUTTON_SS1, gpio.IN)
-        gpio.setup(cf.GPIO_BUTTON_SS2, gpio.IN)
 
-        # Exit signal handle
-        signal.signal(signal.SIGUSR2, self.clean_up_gpio)
-        signal.signal(signal.SIGTERM, self.clean_up_gpio)
-        signal.signal(signal.SIGINT, self.clean_up_gpio)
-        
+        while True:
+            try:
+                gpio.setup(cf.GPIO_BUTTON_1, gpio.IN)
+                gpio.setup(cf.GPIO_BUTTON_2, gpio.IN)
+                gpio.setup(cf.GPIO_BUTTON_3, gpio.IN)
+                gpio.setup(cf.GPIO_BUTTON_4, gpio.IN)
+                gpio.setup(cf.GPIO_BUTTON_SS1, gpio.IN)
+                gpio.setup(cf.GPIO_BUTTON_SS2, gpio.IN)    
+            except:
+                val = os.system('sudo chmod -R 777 /sys/class/gpio/gpio*')
+            
+            break
 
     def run(self):
         while not gs.exit_signal:
@@ -34,13 +36,14 @@ class ButtonReader(threading.Thread):
             gs.button_ss2 = gpio.read(cf.GPIO_BUTTON_SS2)
             time.sleep(0.05)
         self.clean_up_gpio(None, None)
+        print("Exiting from ButtonReader")
 
     def clean_up_gpio(self, num, stack):
         print("Clean up GPIO...")
-        gpio.cleanup(cf.GPIO_BUTTON_1)
-        gpio.cleanup(cf.GPIO_BUTTON_2)
-        gpio.cleanup(cf.GPIO_BUTTON_3)
-        gpio.cleanup(cf.GPIO_BUTTON_4)
-        gpio.cleanup(cf.GPIO_BUTTON_SS1)
-        gpio.cleanup(cf.GPIO_BUTTON_SS2)
+        # gpio.cleanup(cf.GPIO_BUTTON_1)
+        # gpio.cleanup(cf.GPIO_BUTTON_2)
+        # gpio.cleanup(cf.GPIO_BUTTON_3)
+        # gpio.cleanup(cf.GPIO_BUTTON_4)
+        # gpio.cleanup(cf.GPIO_BUTTON_SS1)
+        # gpio.cleanup(cf.GPIO_BUTTON_SS2)
         exit(0)
