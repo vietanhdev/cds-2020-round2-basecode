@@ -30,7 +30,7 @@ STEERING_CHANNEL        = 0
 MIN_ANGLE = -60 # 10 * maxLeft angle(20 degree) = -200, mul 10 to smooth control
 MAX_ANGLE = 60  # 10 * maxRight angle
 
-MAX_SPEED = 15
+MAX_SPEED = 40
 MIN_ACTIVE_SPEED = 10
 
 MIN_SERVO = 0
