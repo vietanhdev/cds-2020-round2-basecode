@@ -1,4 +1,6 @@
-# CDS - ROUND 2
+# Digital Race - Cuộc đua số - ROUND 2
+
+This code was written based on the original code from [FPT Dira platform](https://github.com/fpt-corp/DiRa). In this repository, we target Jetson TX2 with Traxxas car model.
 
 ## Requirements:
 - Hardware: DIRA platform - FPT
